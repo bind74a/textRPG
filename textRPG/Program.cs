@@ -187,7 +187,7 @@ namespace textRPG
         static void Inventorymeun()
             //보유 중인 아이템 목록
         {
-
+            Console.Clear();
 
             bool menuBack = false;
             do
@@ -255,18 +255,17 @@ namespace textRPG
 
         static void Equipmeun()
         {
+
             Console.Clear();
 
-            bool menuBack = false;
-            do
-            {
-                int choiceindex = 1;
-                foreach (Item item in inventory)
-                //아이템 클래스의 정보를item변수에 넣고 inventory 리스트로넣는다
+            int choiceindex = 1;
+            foreach (Item item in inventory)
+                //inventory 리스트중 Item 클래스 객체정보를 item 이라는 변수에 넣는다
                 {
                     Console.WriteLine();
                     if (item is Weapon weapon)
-                    //item 이라는 변수안에 Weapon클래스의 weapon이라는객체일때 작동
+                    //Weapon클래스 weapon 변수 로 지정
+                    //item 이라는 변수안에 Weapon클래스의 객체일때 작동
                     //창착시 [E] 표시 추가하기
                     {
 
@@ -283,13 +282,13 @@ namespace textRPG
                 }
                 Console.WriteLine($"{choiceindex}. 뒤로 가기");
                 //항상 마지막에 ++ 되서 남은숫자는 뒤로가기로 할당된다
-
-
+         
+                    
                 // 상점에서 산 아이템이 목록에 추가되서 3번째 아이템 선택지 만들기
                 // 선택지을 리스트에 들어가있는 개체수(칸수)만큼 늘리는법 을 찾기
                 Console.Write("장착할 아이템에 번호를 입력해주세요 : ");
                while (true)
-                {
+               {
                     string input = Console.ReadLine();
 
                     if (int.TryParse(input, out int itemIndex) && itemIndex > 0 && itemIndex <= inventory.Count)
@@ -307,11 +306,18 @@ namespace textRPG
                             {
                                 weapon.isEquipped = false;
                                 user.userWeapon -= weapon.attack;
+                                Console.WriteLine("장착이해제 되었습니다.");
+                            Console.Clear();
+                            break;
+
                             }
                             else
                             {
                                 weapon.isEquipped = true;
                                 user.userWeapon += weapon.attack;
+                                Console.WriteLine("장착이되엇습니다.");
+                            Console.Clear();
+                            break;
                             }
                         }
                         else if (itemnum is Armor armor)
@@ -320,20 +326,27 @@ namespace textRPG
                             {
                                 armor.isEquipped = false;
                                 user.userArmor -= armor.defense;
+                                Console.WriteLine("장착이해제 되었습니다.");
+                            Console.Clear();
+                            break;
                             }
                             else
                             {
                                 armor.isEquipped = true;
                                 user.userArmor += armor.defense;
+                                Console.WriteLine("장착이되엇습니다.");
+                            Console.Clear();
+                            break;
                             }
                         }
-                        else if (itemIndex == choiceindex)
-                        //입력한 숫자가 choiceindex에서
-                        //할당된 남은 숫자랑 똑같을때 작동해서 do 루프을 빠져나오기위한 bool를 할당한다 
-                        {
-                            // 뒤로 가기 선택
-                            menuBack = true;
-                        }
+                        
+                    }
+                    else if (itemIndex == choiceindex)
+                    //입력한 숫자가 choiceindex에서
+                    //할당된 남은 숫자랑 똑같을때 작동해서 do 루프을 빠져나오기위한 bool를 할당한다 
+                    {
+                    Console.Clear();
+                    break;
                     }
                     else
                     {
@@ -341,8 +354,8 @@ namespace textRPG
 
                     }
 
-                }
-            } while (menuBack == false);
+               }
+
         }
 
         static void Store()
@@ -358,11 +371,26 @@ namespace textRPG
                 Console.WriteLine();
                 if (item is Weapon weapon)
                 {
-                    Console.WriteLine($"{item.name} || 공격력 {weapon.attack} || 가격 {weapon.price}");
+                    if (axe.buy != true)
+                    {
+                        Console.WriteLine($"{item.name} || 공격력 {weapon.attack} || 가격 {weapon.price}");
+                    }
+                    else
+                    {
+                        Console.WriteLine($" {item.name} || 공격력 {weapon.attack} || 구매완료");
+                    }
+                    
                 }
                 else if (item is Armor armor)
                 {
-                    Console.WriteLine($"{item.name} || 방어력 {armor.defense} || 가격 {armor.price}");
+                    if (huntershirt.buy != true)
+                    {
+                        Console.WriteLine($"{item.name} || 방어력 {armor.defense} || 가격 {armor.price}");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{item.name} || 방어력 {armor.defense} || 구매 완료");
+                    }
                 }
             }
             
