@@ -199,7 +199,7 @@ namespace textRPG
                 Console.WriteLine("보유 골드 :" + user.gold);
 
                 foreach ( Item item in inventory)
-                //아이템 클래스의 정보를item변수에 넣고 inventory 리스트로넣는다
+                //아이템 클래스의 정보를item변수에 넣고 inventory 리스트를 기반으로 foreach 작동
                 {
                     Console.WriteLine();
                     if (item is Weapon weapon)
@@ -260,9 +260,9 @@ namespace textRPG
 
             int choiceindex = 1;
             foreach (Item item in inventory)
-                //inventory 리스트중 Item 클래스 객체정보를 item 이라는 변수에 넣는다
-                {
-                    Console.WriteLine();
+            //아이템 클래스의 정보를item변수에 넣고 inventory 리스트를 기반으로 foreach 작동
+            {
+                Console.WriteLine();
                     if (item is Weapon weapon)
                     //Weapon클래스 weapon 변수 로 지정
                     //item 이라는 변수안에 Weapon클래스의 객체일때 작동
@@ -279,7 +279,7 @@ namespace textRPG
                         
                     }
                     choiceindex++;
-                }
+            }
                 Console.WriteLine($"{choiceindex}. 뒤로 가기");
                 //항상 마지막에 ++ 되서 남은숫자는 뒤로가기로 할당된다
          
@@ -342,8 +342,8 @@ namespace textRPG
                         
                     }
                     else if (itemIndex == choiceindex)
-                    //입력한 숫자가 choiceindex에서
-                    //할당된 남은 숫자랑 똑같을때 작동해서 do 루프을 빠져나오기위한 bool를 할당한다 
+                    //입력한 숫자 == 장착 선택지 목록외 숫자
+                    //할당된 남은 숫자랑 똑같을때 작동한다
                     {
                     Console.Clear();
                     break;
